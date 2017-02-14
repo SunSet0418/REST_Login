@@ -8,7 +8,7 @@ app.use(bodyParser.urlencoded({
   extended: true
 }))
 
-mongoose.connect("mongodb://localhost/login", function(err){
+mongoose.connect("mongodb://localhost:28001/login", function(err){
   if(err){
     console.log("DB Error!");
     throw err
@@ -51,7 +51,10 @@ app.post('/login', function(req, res){
     if(result){
       if(result.password == req.param('password')){
         console.log('Login : '+result.username)
-        res.json(result)
+        res.json({
+          success : true,
+          message : "Login Success"
+        })
       }
       else if(result.password != req.param('password')){
         console.log('Password Error : '+result.username);
@@ -62,7 +65,7 @@ app.post('/login', function(req, res){
       }
     }
     else{
-      console.log("ID Error : "+result.username)
+      console.log("ID Error")
       res.json({
         success: false,
         message: "ID Error"
@@ -99,7 +102,10 @@ app.post('/register', function(req, res){
         }
         else {
           console.log(req.param('username')+" Save success")
-          res.json(user)
+          res.json({
+            success : true,
+            message : "Register Success"
+          })
         }
       })
     }

@@ -10,8 +10,11 @@ app.use(bodyParser.urlencoded({
 
 mongoose.connect("mongodb://localhost/login", function(err){
   if(err){
-    console.log("Database Error");
+    console.log("DB Error!");
     throw err
+  }
+  else {
+    console.log("DB Connect Success!")
   }
 })
 
